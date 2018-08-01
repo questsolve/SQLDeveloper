@@ -7,9 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.kosmo.ui.sample.JTable_panel;
-import com.kosmo.ui.sample.JTextPane_panel;
-import com.kosmo.ui.sample.JTree_panel;
+
 
 
 public class SqlDeveloperMainFrame extends JFrame {
