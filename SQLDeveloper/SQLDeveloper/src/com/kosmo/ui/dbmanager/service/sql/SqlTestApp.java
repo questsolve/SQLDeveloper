@@ -22,10 +22,16 @@ public class SqlTestApp {
 		empVo = empService.select(empVo);
 		System.out.println(empVo);
 		
+		
+		
+		
+		
 		sqlVo.setEmp(empVo);
 		sqlVo.setUseQuery("SELECT * FROM devemp WHERE deptno =11");
 		System.out.println(sqlService.insert(sqlVo));
 		
+		
+		/////////////////////////
 		List<Map> list = sqlService.selectByQuery(sqlVo.getUseQuery());
 		Map column = (Map)list.get(0);
 		List columnList = (List)column.get("column");
@@ -40,14 +46,7 @@ public class SqlTestApp {
 			}
 			
 		}
-		
-		
-		
-		
-		
-		
-		
-				
+		///////////////////////////////////////		
 
 	}
 
