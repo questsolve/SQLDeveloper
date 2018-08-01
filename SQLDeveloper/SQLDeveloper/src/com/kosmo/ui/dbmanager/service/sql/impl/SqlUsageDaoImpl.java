@@ -7,6 +7,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -122,7 +123,31 @@ public class SqlUsageDaoImpl implements SqlUsageDao {
 		}
 		return query;
 	}
-
+	
+	public List<String> getColumns(String sql){
+		Connection con = null;
+		PreparedStatement pstate = null;
+		ResultSet rs = null;
+		ResultSetMetaData rsmd =null;
+		DBManager dbm = new DBManager();
+		List<String> columns = new ArrayList<String>();
+		try {
+			con =dbm.dbConn();
+			pstate = con.prepareStatement(sql);
+			rs = pstate.executeQuery();
+			rsmd = rs.getMetaData();
+			for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+				columns.add(rsmd.getColumnLabel(i));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			dbm.dbClose(con, pstate, rs);
+		}
+		
+		return columns;
+	}
 	
 	public List<Map> selectByQuery(String sql){
 		List<Map> list = new ArrayList<Map>();
@@ -144,13 +169,15 @@ public class SqlUsageDaoImpl implements SqlUsageDao {
 			rsmd = rs.getMetaData();
 			
 			for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+				
 				column.add(rsmd.getColumnLabel(i));
 			}
 			
 			while(rs.next()) {
 				map = new HashMap<String, String>();
 				for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-					map.put(column.get(i), (String)rs.getObject(i));
+					//System.out.println(rs.getString(i));
+					map.put(column.get(i-1), rs.getString(i));
 				}
 				
 				list.add(map);
