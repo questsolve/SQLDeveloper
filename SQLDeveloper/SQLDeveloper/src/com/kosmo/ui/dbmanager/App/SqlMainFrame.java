@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import java.awt.GridLayout;
@@ -24,11 +25,16 @@ import javax.swing.event.TreeExpansionEvent;
 import javax.swing.event.TreeExpansionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import com.kosmo.ui.sample.JTable_panel;
+import com.kosmo.ui.sample.JTextPane_panel;
+
 public class SqlMainFrame {
 
 	private JFrame frame;
-	private JTable table;
-	private JTable table_1;
+	private TablePanel tablePanel;
+	private MenuPanel menuPanel;
+	private TextPanel textPanel;
+	
 
 	/**
 	 * Launch the application.
@@ -60,100 +66,81 @@ public class SqlMainFrame {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 900, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JMenuBar menuBar = new JMenuBar();
-		frame.setJMenuBar(menuBar);
-		
-		JMenu mnFile = new JMenu("FIle");
-		menuBar.add(mnFile);
-		
-		JMenuItem mntmNew = new JMenuItem("New");
-		mnFile.add(mntmNew);
-		
-		JMenuItem mntmOpen = new JMenuItem("Open");
-		mnFile.add(mntmOpen);
-		
-		JMenuItem mntmSave = new JMenuItem("Save");
-		mnFile.add(mntmSave);
-		
-		JMenuItem mntmSaveAs = new JMenuItem("Save as");
-		mnFile.add(mntmSaveAs);
-		
-		JMenuItem mntmRestart = new JMenuItem("Restart");
-		mnFile.add(mntmRestart);
-		
-		JMenuItem mntmQuit = new JMenuItem("Exit");
-		mnFile.add(mntmQuit);
-		
-		JMenu mnEdit = new JMenu("Edit");
-		menuBar.add(mnEdit);
-		
-		JMenu mnNavigate = new JMenu("Navigate");
-		menuBar.add(mnNavigate);
-		
-		JMenu mnRun = new JMenu("Run");
-		menuBar.add(mnRun);
-		
-		JMenu mnWindow = new JMenu("Window");
-		menuBar.add(mnWindow);
-		
-		JMenu mnHelp = new JMenu("Help");
-		menuBar.add(mnHelp);
-		
-		DefaultMutableTreeNode root = new DefaultMutableTreeNode("ÇÃ·¹ÀÌ ¸®½ºÆ®");
-		DefaultMutableTreeNode child1 = new DefaultMutableTreeNode("ÈüÇÕ");
-		DefaultMutableTreeNode child2 = new DefaultMutableTreeNode("ÀçÁî");
-		DefaultMutableTreeNode child3 = new DefaultMutableTreeNode("¶ô");
-		
-		root.add(child1);
-		root.add(child2);
-		root.add(child3);
-		
-		JTree tree = new JTree(root);
-		tree.setBackground(Color.WHITE);
-		tree.addTreeExpansionListener(new TreeExpansionListener() {
-			public void treeCollapsed(TreeExpansionEvent event) {
-				System.out.println("ÆÐ½º");
-			}
-			public void treeExpanded(TreeExpansionEvent event) {
-				System.out.println("¿ÀÇÂ");
-			}
-		});
-		frame.getContentPane().add(tree, BorderLayout.WEST);
-		
-		JTextArea textArea = new JTextArea();
-		textArea.setBackground(UIManager.getColor("Button.background"));
-		frame.getContentPane().add(textArea, BorderLayout.CENTER);
+		JPanel centerPanel = new JPanel();
+		centerPanel.setLayout(new BorderLayout(0, 0));
 		
 		
 		
-		String columnNames[] =
-			{ "userno", "username", "job", "sal" };
-		Object rowData[][] =
-			{
-			{ 1, "¸Àµ¿»ê", 100, "¿À¸®¿Â" },
-			{ 2, "¾ÆÆú·Î", 200, "ºÒ·®½ÄÇ°" },
-			{ 3, "Ä­ÃÝÄÚ", 300, "°úÀÚ°èÀÇ ·¹Àüµå" } };
-		
-		table =  new JTable(rowData, columnNames);
-		JScrollPane js = new JScrollPane(table);
-		frame.getContentPane().add(js, BorderLayout.SOUTH);
+		menuPanel = new MenuPanel(frame);
+		centerPanel.add(menuPanel,BorderLayout.NORTH);
+		frame.add(centerPanel);
 		
 		
-		JButton btnConnection = new JButton("Connection");
-		btnConnection.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		/*
+		tablePanel = new TablePanel();
+		centerPanel.add(tablePanel, BorderLayout.SOUTH);
+		
+		//ï¿½ë¿‰ï¿½ëµ’ï¿½ê½£
+		textPanel = new TextPanel(tablePanel);  //<--ï¿½ë€’ï¿½ì” é‡‰ë·€ë™£ï¿½ê¼¸è¹‚ï¿½å¯ƒìŽŒìžï¿½ë¹ äºŒì‡±ëƒ¼ äºŒì‡¨ë¦°
+		centerPanel.add(textPanel, BorderLayout.NORTH);
+		//*/
+		
+//		
+//		
+//		DefaultMutableTreeNode root = new DefaultMutableTreeNode("í”Œë ˆì´ ë¦¬ìŠ¤íŠ¸");
+//		DefaultMutableTreeNode child1 = new DefaultMutableTreeNode("íž™í•©");
+//		DefaultMutableTreeNode child2 = new DefaultMutableTreeNode("ìž¬ì¦ˆ");
+//		DefaultMutableTreeNode child3 = new DefaultMutableTreeNode("ë½");
+//		
+//		root.add(child1);
+//		root.add(child2);
+//		root.add(child3);
+//		
+//		JTree tree = new JTree(root);
+//		tree.setBackground(Color.WHITE);
+//		tree.addTreeExpansionListener(new TreeExpansionListener() {
+//			public void treeCollapsed(TreeExpansionEvent event) {
+//				System.out.println("íŒ¨ìŠ¤");
+//			}
+//			public void treeExpanded(TreeExpansionEvent event) {
+//				System.out.println("ì˜¤í”ˆ");
+//			}
+//		});
+//		frame.getContentPane().add(tree, BorderLayout.WEST);
+//		
+//		JTextArea textArea = new JTextArea();
+//		textArea.setBackground(UIManager.getColor("Button.background"));
+//		frame.getContentPane().add(textArea, BorderLayout.CENTER);
+//		
+//		
+//		
+//		String columnNames[] =
+//			{ "userno", "username", "job", "sal" };
+//		Object rowData[][] =
+//			{
+//			{ 1, "ë§›ë™ì‚°", 100, "ì˜¤ë¦¬ì˜¨" },
+//			{ 2, "ì•„í´ë¡œ", 200, "ë¶ˆëŸ‰ì‹í’ˆ" },
+//			{ 3, "ì¹¸ìµ¸ì½”", 300, "ê³¼ìžê³„ì˜ ë ˆì „ë“œ" } };
+//		
+//		table =  new JTable(rowData, columnNames);
+//		JScrollPane js = new JScrollPane(table);
+//		frame.getContentPane().add(js, BorderLayout.SOUTH);
+//		
+//		
+//		JButton btnConnection = new JButton("Connection");
+//		btnConnection.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
 //				EmployeeDAO empDao = new EmployeeDAOImpl();
 //				List<EmpVO> list = empDao.selectAll();
 //				for (EmpVO empVO : list) {
 //					System.out.println(empVO);
 //				}
 //				System.out.println(list.size());
-			}
-		});
-		frame.getContentPane().add(btnConnection, BorderLayout.EAST);
-		
-		table_1 = new JTable();
-		frame.getContentPane().add(table_1, BorderLayout.SOUTH);
+//			}
+//		});
+//		frame.getContentPane().add(btnConnection, BorderLayout.EAST);
+//		
+//		table_1 = new JTable();
+//		frame.getContentPane().add(table_1, BorderLayout.SOUTH);
 	}
 }
