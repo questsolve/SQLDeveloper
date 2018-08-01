@@ -55,7 +55,7 @@ public class SqlUsageDaoImpl implements SqlUsageDao {
 		PreparedStatement pstate = null;
 		DBManager dbm = new DBManager();
 		StringBuilder sb = new StringBuilder("INSERT INTO freusage(usageno,empno,usedquery,downloadcount)");
-		sb.append(" VALUES(freusage_seq,?,?,0)");
+		sb.append(" VALUES(freusage_seq.nextval,?,?,0)");
 		
 		try {
 			con = dbm.dbConn();
