@@ -1,8 +1,8 @@
 package com.kosmo.ui.dbmanager.service.emp.impl;
 
+import com.kosmo.ui.dbmanager.service.domain.EmpVO;
 import com.kosmo.ui.dbmanager.service.emp.EmpDao;
 import com.kosmo.ui.dbmanager.service.emp.EmpService;
-import com.kosmo.ui.dbmanager.service.emp.EmpVO;
 
 public class EmpServiceImpl implements EmpService {
 

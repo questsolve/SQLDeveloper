@@ -1,5 +1,6 @@
 package com.kosmo.ui.dbmanager.service.emp;
 
+import com.kosmo.ui.dbmanager.service.domain.EmpVO;
 import com.kosmo.ui.dbmanager.service.emp.impl.EmpServiceImpl;
 
 public class EmpTestApp {

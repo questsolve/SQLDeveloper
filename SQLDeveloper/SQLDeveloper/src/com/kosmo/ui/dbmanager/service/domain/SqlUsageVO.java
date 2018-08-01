@@ -1,6 +1,4 @@
-package com.kosmo.ui.dbmanager.service.sql;
-
-import com.kosmo.ui.dbmanager.service.emp.EmpVO;
+package com.kosmo.ui.dbmanager.service.domain;
 
 public class SqlUsageVO {
 

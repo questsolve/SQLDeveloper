@@ -5,8 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.kosmo.ui.dbmanager.service.domain.EmpVO;
+import com.kosmo.ui.dbmanager.service.domain.SqlUsageVO;
 import com.kosmo.ui.dbmanager.service.emp.EmpService;
-import com.kosmo.ui.dbmanager.service.emp.EmpVO;
 import com.kosmo.ui.dbmanager.service.emp.impl.EmpServiceImpl;
 import com.kosmo.ui.dbmanager.service.sql.impl.SqlUsageServiceImpl;
 

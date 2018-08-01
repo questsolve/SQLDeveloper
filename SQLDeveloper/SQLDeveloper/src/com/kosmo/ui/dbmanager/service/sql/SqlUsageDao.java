@@ -3,7 +3,8 @@ package com.kosmo.ui.dbmanager.service.sql;
 import java.util.List;
 import java.util.Map;
 
-import com.kosmo.ui.dbmanager.service.emp.EmpVO;
+import com.kosmo.ui.dbmanager.service.domain.EmpVO;
+import com.kosmo.ui.dbmanager.service.domain.SqlUsageVO;
 
 public interface SqlUsageDao {
 

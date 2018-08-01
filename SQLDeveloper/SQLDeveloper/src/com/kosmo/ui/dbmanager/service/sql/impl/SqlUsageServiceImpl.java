@@ -3,10 +3,10 @@ package com.kosmo.ui.dbmanager.service.sql.impl;
 import java.util.List;
 import java.util.Map;
 
-import com.kosmo.ui.dbmanager.service.emp.EmpVO;
+import com.kosmo.ui.dbmanager.service.domain.EmpVO;
+import com.kosmo.ui.dbmanager.service.domain.SqlUsageVO;
 import com.kosmo.ui.dbmanager.service.sql.SqlUsageDao;
 import com.kosmo.ui.dbmanager.service.sql.SqlUsageService;
-import com.kosmo.ui.dbmanager.service.sql.SqlUsageVO;
 
 public class SqlUsageServiceImpl implements SqlUsageService {
 

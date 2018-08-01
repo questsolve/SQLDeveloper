@@ -1,4 +1,4 @@
-package com.kosmo.ui.dbmanager.service.emp;
+package com.kosmo.ui.dbmanager.service.domain;
 
 public class EmpVO {
 

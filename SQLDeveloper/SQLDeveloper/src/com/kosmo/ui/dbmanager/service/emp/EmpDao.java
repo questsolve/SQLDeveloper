@@ -1,5 +1,7 @@
 package com.kosmo.ui.dbmanager.service.emp;
 
+import com.kosmo.ui.dbmanager.service.domain.EmpVO;
+
 public interface EmpDao {
 	
 	public EmpVO select(EmpVO temp);

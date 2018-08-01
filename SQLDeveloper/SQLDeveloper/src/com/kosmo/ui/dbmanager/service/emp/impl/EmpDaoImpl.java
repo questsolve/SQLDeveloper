@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.kosmo.ui.dbmanager.DBManager;
+import com.kosmo.ui.dbmanager.service.domain.EmpVO;
 import com.kosmo.ui.dbmanager.service.emp.EmpDao;
-import com.kosmo.ui.dbmanager.service.emp.EmpVO;
 
 public class EmpDaoImpl implements EmpDao {
 
