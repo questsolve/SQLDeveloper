@@ -1,6 +1,6 @@
-package com.kosmo.ui.dbmanager.service;
+package com.kosmo.ui.dbmanager.service.emp;
 
-import com.kosmo.ui.dbmanager.service.impl.EmpServiceImpl;
+import com.kosmo.ui.dbmanager.service.emp.impl.EmpServiceImpl;
 
 public class EmpTestApp {
 
@@ -22,6 +22,13 @@ public class EmpTestApp {
 		
 		temp.setJob("전산과장");
 		System.out.println(empService.update(temp));
+		
+		temp.setEmpno(8);
+		
+		System.out.println(empService.updateAuth(temp));
+		
+		System.out.println(empService.delete(temp));
+		
 		
 		
 	}

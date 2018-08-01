@@ -1,8 +1,8 @@
-package com.kosmo.ui.dbmanager.service.impl;
+package com.kosmo.ui.dbmanager.service.emp.impl;
 
-import com.kosmo.ui.dbmanager.service.EmpDao;
-import com.kosmo.ui.dbmanager.service.EmpService;
-import com.kosmo.ui.dbmanager.service.EmpVO;
+import com.kosmo.ui.dbmanager.service.emp.EmpDao;
+import com.kosmo.ui.dbmanager.service.emp.EmpService;
+import com.kosmo.ui.dbmanager.service.emp.EmpVO;
 
 public class EmpServiceImpl implements EmpService {
 
@@ -25,4 +25,13 @@ public class EmpServiceImpl implements EmpService {
 	public int update(EmpVO vo) {
 		return empDao.update(vo);
 	}
+	
+	public int updateAuth(EmpVO vo) {
+		return empDao.updateAuth(vo);
+	}
+	
+	public int delete(EmpVO vo) {
+		return empDao.delete(vo);
+	}
+	
 }

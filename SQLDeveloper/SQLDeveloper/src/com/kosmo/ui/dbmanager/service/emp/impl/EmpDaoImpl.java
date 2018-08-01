@@ -1,4 +1,4 @@
-package com.kosmo.ui.dbmanager.service.impl;
+package com.kosmo.ui.dbmanager.service.emp.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.kosmo.ui.dbmanager.DBManager;
-import com.kosmo.ui.dbmanager.service.EmpDao;
-import com.kosmo.ui.dbmanager.service.EmpVO;
+import com.kosmo.ui.dbmanager.service.emp.EmpDao;
+import com.kosmo.ui.dbmanager.service.emp.EmpVO;
 
 public class EmpDaoImpl implements EmpDao {
 
@@ -29,6 +29,7 @@ public class EmpDaoImpl implements EmpDao {
 			sb.append("SELECT e.empno,e.pw,e.iswork,e.job,d.deptno,e.auth,d.deptname,e.empname");
 			sb.append(" FROM devemp e, devdept d");
 			sb.append(" WHERE e.deptno = d.deptno");
+			sb.append(" AND iswork =1");
 			sb.append(" AND empno = ?");
 			pstmt = con.prepareStatement(sb.toString());
 			pstmt.setInt(1, temp.getEmpno());
@@ -75,7 +76,6 @@ public class EmpDaoImpl implements EmpDao {
 			
 			result = pstate.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			dbm.dbClose(con, pstate);			
@@ -96,6 +96,8 @@ public class EmpDaoImpl implements EmpDao {
 		sb.append(	"UPDATE devemp");
 		sb.append(" SET iswork =?,job = ?, deptno =?");
 		sb.append("WHERE empno =?");
+		sb.append(" AND iswork =1");
+		
 		
 		try {
 			con = dbm.dbConn();
@@ -107,7 +109,6 @@ public class EmpDaoImpl implements EmpDao {
 			
 			result = pstate.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			dbm.dbClose(con, pstate);			
@@ -119,8 +120,59 @@ public class EmpDaoImpl implements EmpDao {
 	}
 
 	//update Auth
-	
+	public int updateAuth(EmpVO vo) {
+		int result =0;
+		DBManager dbm = new DBManager();
+		Connection con = null;
+		PreparedStatement pstate = null;
+		StringBuilder sb = new StringBuilder();
+		sb.append(	"UPDATE devemp");
+		sb.append(" SET auth = 2");
+		sb.append("WHERE empno =?");
+		sb.append(" AND iswork =1");
+		
+		try {
+			con = dbm.dbConn();
+			pstate = con.prepareStatement(sb.toString());
+			pstate.setInt(1, vo.getEmpno());
+			
+			result = pstate.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			dbm.dbClose(con, pstate);			
+		}
+		
+		
+		return result;
+
+	}
 
 	//delete
+	public int delete(EmpVO vo) {
+		int result =0;
+		DBManager dbm = new DBManager();
+		Connection con = null;
+		PreparedStatement pstate = null;
+		StringBuilder sb = new StringBuilder();
+		sb.append(	"UPDATE devemp");
+		sb.append(" SET iswork = 0");
+		sb.append("WHERE empno =?");
+		
+		try {
+			con = dbm.dbConn();
+			pstate = con.prepareStatement(sb.toString());
+			pstate.setInt(1, vo.getEmpno());
+			
+			result = pstate.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			dbm.dbClose(con, pstate);			
+		}
+		
+		
+		return result;
 
+	}
 }
