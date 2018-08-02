@@ -14,8 +14,6 @@ import com.kosmo.ui.dbmanager.service.emp.impl.EmpServiceImpl;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
-import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.JTextField;
 import javax.swing.JButton;
