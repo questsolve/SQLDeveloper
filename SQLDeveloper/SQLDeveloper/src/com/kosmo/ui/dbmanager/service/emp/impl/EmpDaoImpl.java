@@ -31,8 +31,10 @@ public class EmpDaoImpl implements EmpDao {
 			sb.append(" WHERE e.deptno = d.deptno");
 			sb.append(" AND iswork =1");
 			sb.append(" AND empno = ?");
+			sb.append(" AND pw = ?");
 			pstmt = con.prepareStatement(sb.toString());
 			pstmt.setInt(1, temp.getEmpno());
+			pstmt.setString(2, temp.getPw());
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				vo.setAuth(rs.getInt("auth"));

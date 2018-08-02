@@ -5,9 +5,13 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTree;
 import javax.swing.border.EmptyBorder;
 
-
+import com.kosmo.ui.dbmanager.App.developerpart.MenuPanel;
+import com.kosmo.ui.dbmanager.App.developerpart.TablePanel;
+import com.kosmo.ui.dbmanager.App.developerpart.TextPanel;
+import com.kosmo.ui.dbmanager.App.developerpart.TreeAppendPanel;
 
 
 public class SqlDeveloperMainFrame extends JFrame {
@@ -18,9 +22,12 @@ public class SqlDeveloperMainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel contentPane;
+	
 	private MenuPanel menuPanel;
 	private TablePanel tablePanel;
 	private TextPanel textPanel;
+	private TreeAppendPanel treePanel;
+	private JTree tree;
 
 	/**
 	 * Launch the application.
@@ -30,6 +37,7 @@ public class SqlDeveloperMainFrame extends JFrame {
 			public void run() {
 				try {
 					SqlDeveloperMainFrame frame = new SqlDeveloperMainFrame();
+					
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,31 +52,31 @@ public class SqlDeveloperMainFrame extends JFrame {
 	
 	public SqlDeveloperMainFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 900, 600);
-		
+		setBounds(200, 0, 900, 600);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		menuPanel = new MenuPanel(this);
-		contentPane.add(menuPanel, BorderLayout.NORTH);
+		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		
 		JPanel centerPanel = new JPanel();
 		centerPanel.setLayout(new BorderLayout(0, 0));
-		contentPane.add(centerPanel, BorderLayout.CENTER);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		
 		
 		tablePanel = new TablePanel();
 		centerPanel.add(tablePanel, BorderLayout.SOUTH);
 		
-
-		textPanel = new TextPanel(tablePanel); 
-		centerPanel.add(textPanel, BorderLayout.NORTH);
 		
-		/*
+		textPanel = new TextPanel(tablePanel);
+		centerPanel.add(textPanel, BorderLayout.CENTER);
+		
 
-		treePanel = new  
-		contentPanel.add(treePanel, BorderLayout.WEST);
+		///*
+		treePanel = new TreeAppendPanel();
+		contentPane.add(treePanel, BorderLayout.WEST);
+		//*/
+		menuPanel = new MenuPanel(this);
+		contentPane.add(menuPanel, BorderLayout.NORTH);
 
-		 */	
+		contentPane.add(centerPanel);
 		setContentPane(contentPane);
 	}
 

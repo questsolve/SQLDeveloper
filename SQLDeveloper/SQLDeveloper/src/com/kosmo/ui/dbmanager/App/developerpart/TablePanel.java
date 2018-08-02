@@ -1,4 +1,4 @@
-package com.kosmo.ui.dbmanager.App;
+package com.kosmo.ui.dbmanager.App.developerpart;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -36,22 +36,22 @@ public class TablePanel extends JPanel {
 		contentPane.setLayout(new BorderLayout(0, 0)); 
 
 		//		**************************************************
-		//		** JTABLE ?‚¬?š©ë²? **
-		//		   ë°©ë²•1: ?°?´?„°,ì»¬ëŸ¼ëª…ìƒ?„± 							  -> JTable?ƒ?„±(?°?´?„°[][], ì»¬ëŸ¼[])
-		//		   ë°©ë²•2: ?°?´?„°,ì»¬ëŸ¼ëª…ìƒ?„±  ?›„  ëª¨ë¸?— ? ?š©(?°?´?„°[][], ì»¬ëŸ¼[]) -> JTable?ƒ?„±(ëª¨ë¸)
+		//		** JTABLE ?ï¿½ï¿½?ï¿½ï¿½ï¿½? **
+		//		   ë°©ë²•1: ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½,ì»¬ëŸ¼ëª…ìƒ?ï¿½ï¿½ 							  -> JTable?ï¿½ï¿½?ï¿½ï¿½(?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½[][], ì»¬ëŸ¼[])
+		//		   ë°©ë²•2: ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½,ì»¬ëŸ¼ëª…ìƒ?ï¿½ï¿½  ?ï¿½ï¿½  ëª¨ë¸?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½(?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½[][], ì»¬ëŸ¼[]) -> JTable?ï¿½ï¿½?ï¿½ï¿½(ëª¨ë¸)
 		//			
-		//			ëª¨ë¸?‚¬?š©ë²?---------------------------------------
+		//			ëª¨ë¸?ï¿½ï¿½?ï¿½ï¿½ï¿½?---------------------------------------
 		//			public DefaultTableModel(Object[][] data, Object[] columnNames) { }
 		//			public DefaultTableModel(Vector data, Vector columnNames) { }
 		//			----------------------------------------------
 		//		**************************************************
 
 		//----------------------------------------------
-		//ë°©ë²•1: new JTable(?°?´?„°[][], ì»¬ëŸ¼[])
+		//ë°©ë²•1: new JTable(?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½[][], ì»¬ëŸ¼[])
 		//----------------------------------------------
 		//		Object[][] data = {
-		//				{"1","ê¹??”¨",1000},
-		//				{"2","?´?”¨",2000},
+		//				{"1","ï¿½??ï¿½ï¿½",1000},
+		//				{"2","?ï¿½ï¿½?ï¿½ï¿½",2000},
 		//				{"3","ë°•ì”¨",3000}
 		//		};
 		//		String[] columnNames = {"EMPNO","ENAME","SAL"};
@@ -60,11 +60,11 @@ public class TablePanel extends JPanel {
 
 
 		//---------------------------------------------
-		//ë°©ë²•2: ?°?´?„°,ì»¬ëŸ¼ëª…ìƒ?„± ?›„ ëª¨ë¸?— ? ?š© -> JTable?ƒ?„±(ëª¨ë¸): ?•˜?“œì½”ë”© 
+		//ë°©ë²•2: ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½,ì»¬ëŸ¼ëª…ìƒ?ï¿½ï¿½ ?ï¿½ï¿½ ëª¨ë¸?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ -> JTable?ï¿½ï¿½?ï¿½ï¿½(ëª¨ë¸): ?ï¿½ï¿½?ï¿½ï¿½ì½”ë”© 
 		//---------------------------------------------
 		//		Object[][] data = {
-		//				{"1","ê¹??”¨",1000},
-		//				{"2","?´?”¨",2000},
+		//				{"1","ï¿½??ï¿½ï¿½",1000},
+		//				{"2","?ï¿½ï¿½?ï¿½ï¿½",2000},
 		//				{"3","ë°•ì”¨",3000}
 		//		};
 		//		String[] columnNames = {"EMPNO","ENAME","SAL"};
@@ -75,11 +75,11 @@ public class TablePanel extends JPanel {
 
 
 		//---------------------------------------------
-		//ë°©ë²•2: ?°?´?„°,ì»¬ëŸ¼ëª…ìƒ?„± ?›„ ëª¨ë¸?— ? ?š© -> JTable?ƒ?„±(ëª¨ë¸):  DB?—?„œ ê°?? ¸?˜¤ê¸?(EMP?…Œ?´ë¸? ê³ ì •)
+		//ë°©ë²•2: ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½,ì»¬ëŸ¼ëª…ìƒ?ï¿½ï¿½ ?ï¿½ï¿½ ëª¨ë¸?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ -> JTable?ï¿½ï¿½?ï¿½ï¿½(ëª¨ë¸):  DB?ï¿½ï¿½?ï¿½ï¿½ ï¿½??ï¿½ï¿½?ï¿½ï¿½ï¿½?(EMP?ï¿½ï¿½?ï¿½ï¿½ï¿½? ê³ ì •)
 		//---------------------------------------------
 		//		String[] columnNames = {"EMPNO","ENAME","SAL"};
-		//		defaultTableModel= new DefaultTableModel(null, columnNames);	//ì»¬ëŸ¼:?•˜?“œì½”ë”©
-		//		ArrayList<Vector<Object>> list = selectDataOnlyEmp();			//?°?´?„°: EMP?…Œ?´ë¸? ê³ ì •..
+		//		defaultTableModel= new DefaultTableModel(null, columnNames);	//ì»¬ëŸ¼:?ï¿½ï¿½?ï¿½ï¿½ì½”ë”©
+		//		ArrayList<Vector<Object>> list = selectDataOnlyEmp();			//?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½: EMP?ï¿½ï¿½?ï¿½ï¿½ï¿½? ê³ ì •..
 		//		for(int i=0; i<list.size(); i++) {
 		//			defaultTableModel.addRow(list.get(i)); 
 		//		}
@@ -88,24 +88,24 @@ public class TablePanel extends JPanel {
 
 
 		//---------------------------------------------
-		//ë°©ë²•2: ?°?´?„°,ì»¬ëŸ¼ëª…ìƒ?„± ?›„ ëª¨ë¸?— ? ?š© -> JTable?ƒ?„±(ëª¨ë¸):  DB?—?„œ ê°?? ¸?˜¤ê¸?(SQL?‹¤?–‰ê²°ê³¼)
+		//ë°©ë²•2: ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½,ì»¬ëŸ¼ëª…ìƒ?ï¿½ï¿½ ?ï¿½ï¿½ ëª¨ë¸?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ -> JTable?ï¿½ï¿½?ï¿½ï¿½(ëª¨ë¸):  DB?ï¿½ï¿½?ï¿½ï¿½ ï¿½??ï¿½ï¿½?ï¿½ï¿½ï¿½?(SQL?ï¿½ï¿½?ï¿½ï¿½ê²°ê³¼)
 		//---------------------------------------------
-		defaultTableModel = selectColumnAndData("select e.empno, e.ename, d.deptno, d.dname from emp e, dept d where e.deptno=d.deptno"); 	//ì»¬ëŸ¼,?°?´?„°: sql?‹¤?–‰ ê²°ê³¼ 
+		defaultTableModel = selectColumnAndData("select e.empno, e.ename, d.deptno, d.dname from emp e, dept d where e.deptno=d.deptno"); 	//ì»¬ëŸ¼,?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½: sql?ï¿½ï¿½?ï¿½ï¿½ ê²°ê³¼ 
 		jTable = new JTable(defaultTableModel);
 
 
-		//?–‰?„ ?ƒ ?´ë²¤íŠ¸
+		//?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ë²¤íŠ¸
 		ListSelectionModel rowSM = jTable.getSelectionModel();
 		rowSM.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		rowSM.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting())        {
 					ListSelectionModel lsm = (ListSelectionModel)e.getSource();
-					System.out.println("[?–‰ ë³?ê²?] " + lsm.getMinSelectionIndex()+ "ë²ˆì§¸ ?–‰ ?„ ?ƒ");
+					System.out.println("[?ï¿½ï¿½ ï¿½?ï¿½?] " + lsm.getMinSelectionIndex()+ "ë²ˆì§¸ ?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½");
 				}
 			}
 		});
-		//ì»¬ëŸ¼?„ ?ƒ ?´ë²¤íŠ¸
+		//ì»¬ëŸ¼?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ë²¤íŠ¸
 		ListSelectionModel colSM = jTable.getColumnModel().getSelectionModel();
 		colSM.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		colSM.addListSelectionListener(new ListSelectionListener()
@@ -113,7 +113,7 @@ public class TablePanel extends JPanel {
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting())        {
 					ListSelectionModel lsm = (ListSelectionModel)e.getSource();
-					System.out.println("[ì»¬ëŸ¼] " + lsm.getMinSelectionIndex()+ "ë²ˆì§¸ ì»¬ëŸ¼ ?„ ?ƒ");
+					System.out.println("[ì»¬ëŸ¼] " + lsm.getMinSelectionIndex()+ "ë²ˆì§¸ ì»¬ëŸ¼ ?ï¿½ï¿½?ï¿½ï¿½");
 				}
 			}
 		});
@@ -121,7 +121,7 @@ public class TablePanel extends JPanel {
 
 
 		//---------------------------------------------
-		//		ê¸°ì¡´ ?°?´?„° ì´ˆê¸°?™” ë°©ë²•
+		//		ê¸°ì¡´ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ì´ˆê¸°?ï¿½ï¿½ ë°©ë²•
 		//		defaultTableModel.setNumRows(0);		
 		//      for (int i = 0; i < defaultTableModel.getRowCount(); i++) {
 		//      	defaultTableModel.removeRow(i);
@@ -141,7 +141,7 @@ public class TablePanel extends JPanel {
 
 
 	//------------------------------------------------------------
-	// ?°?´?„°: EMP?…Œ?´ë¸? ê³ ì •..
+	// ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½: EMP?ï¿½ï¿½?ï¿½ï¿½ï¿½? ê³ ì •..
 	//------------------------------------------------------------
 	//public ArrayList<EmpVO> select() {
 	public ArrayList<Vector<Object>> selectDataOnlyEmp() {
@@ -179,7 +179,7 @@ public class TablePanel extends JPanel {
 
 
 	//------------------------------------------------------------
-	// ì»¬ëŸ¼,?°?´?„°: sql?‹¤?–‰ ê²°ê³¼
+	// ì»¬ëŸ¼,?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½: sql?ï¿½ï¿½?ï¿½ï¿½ ê²°ê³¼
 	//------------------------------------------------------------
 	public DefaultTableModel selectColumnAndData(String sql){
 		Vector<Vector<Object>> vtData = new Vector<Vector<Object>>();
@@ -192,13 +192,13 @@ public class TablePanel extends JPanel {
 			ResultSet rs = pstmt.executeQuery();
 
 			ResultSetMetaData metaData = rs.getMetaData();
-			int columnCount = metaData.getColumnCount();	//ì»¬ëŸ¼ê°??ˆ˜
+			int columnCount = metaData.getColumnCount();	//ì»¬ëŸ¼ï¿½??ï¿½ï¿½
 
-			//sql?‹¤?–‰ê²°ê³¼ ì»¬ëŸ¼ëª? -------------
+			//sql?ï¿½ï¿½?ï¿½ï¿½ê²°ê³¼ ì»¬ëŸ¼ï¿½? -------------
 			for (int i=1; i <= columnCount; i++) {
 				vtColumnNames.add(metaData.getColumnLabel(i));	
 			}
-			//sql?‹¤?–‰ê²°ê³¼ ?°?´?„° -------------
+			//sql?ï¿½ï¿½?ï¿½ï¿½ê²°ê³¼ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ -------------
 			while (rs.next()) {
 				Vector<Object> vtOneRow = new Vector<Object>();
 				for (int i=1; i <= columnCount; i++) {

@@ -1,4 +1,4 @@
-package com.kosmo.ui.dbmanager.App;
+package com.kosmo.ui.dbmanager.App.developerpart;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -25,7 +25,7 @@ public class TextPanel extends JPanel {
 	 * Create the panel.
 	 */
 
-	public TextPanel(TablePanel tablePanel) {  //<--?…Œ?´ë¸”íŒ¨?„ë³?ê²½ìœ„?•´ ì£¼ì†Œ ë°›ê¸°
+	public TextPanel(TablePanel tablePanel) {  //<--?ï¿½ï¿½?ï¿½ï¿½ë¸”íŒ¨?ï¿½ï¿½ï¿½?ê²½ìœ„?ï¿½ï¿½ ì£¼ì†Œ ë°›ê¸°
 		contentPane = new JPanel();
 		//			contentPane.setBackground(Color.YELLOW);
 		contentPane.setBorder(new EmptyBorder(5,5,5,5));
@@ -50,13 +50,13 @@ public class TextPanel extends JPanel {
 
 					System.out.println("===============================");
 					try {
-						//jTextArea ?¼?¸ ??— ì»¤ì„œ ?‘ê¸?
+						//jTextArea ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ì»¤ì„œ ?ï¿½ï¿½ï¿½?
 						//int offset = jTextArea.getLineEndOffset(jTextArea.getLineCount()-1);
 						//jTextArea.setCaretPosition(offset);
 						//System.out.println(jTextArea.getCaret().toString());
 
 
-						//?˜„?ž¬ì»¤ì„œ(cursorPositon) ?¼?¸(cursorLine)?˜ ?‹œ?ž‘?œ„ì¹?(cursorLineStartOffset) êµ¬í•˜ê¸? 
+						//?ï¿½ï¿½?ï¿½ï¿½ì»¤ì„œ(cursorPositon) ?ï¿½ï¿½?ï¿½ï¿½(cursorLine)?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½?(cursorLineStartOffset) êµ¬í•˜ï¿½? 
 						int cursorPositon = jTextArea.getCaretPosition();
 						int cursorLine = jTextArea.getLineOfOffset(cursorPositon);
 						int cursorLineStartOffset = jTextArea.getLineStartOffset(cursorLine);
@@ -66,9 +66,9 @@ public class TextPanel extends JPanel {
 
 
 						String findStr = ";";
-						//?˜„?ž¬ì»¤ì„œ(cursorPositon) ?´? „?˜  ;?œ„ì¹˜ì°¾ê¸?
+						//?ï¿½ï¿½?ï¿½ï¿½ì»¤ì„œ(cursorPositon) ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½  ;?ï¿½ï¿½ì¹˜ì°¾ï¿½?
 						int prevIdx = jTextArea.getText().lastIndexOf(findStr, cursorPositon-findStr.length()); 
-						// ê²??ƒ‰?´ ?˜?—ˆ?„ ê²½ìš° 
+						// ï¿½??ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ê²½ìš° 
 						if (prevIdx != -1) { 
 							jTextArea.requestFocus();
 							jTextArea.select(prevIdx, findStr.length()+prevIdx); 
@@ -76,15 +76,15 @@ public class TextPanel extends JPanel {
 							prevIdx = cursorLineStartOffset;
 						}
 
-						//?˜„?ž¬ì»¤ì„œ(cursorPositon) ?´?›„?˜  ;?œ„ì¹˜ì°¾ê¸?
+						//?ï¿½ï¿½?ï¿½ï¿½ì»¤ì„œ(cursorPositon) ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½  ;?ï¿½ï¿½ì¹˜ì°¾ï¿½?
 						int startIdx = jTextArea.getText().indexOf(findStr, cursorPositon);
 						int nextIdx = startIdx + findStr.length();
-						// ê²??ƒ‰?´ ?˜?—ˆ?„ ê²½ìš°
+						// ï¿½??ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ê²½ìš°
 						if (startIdx != -1) { 
 							jTextArea.requestFocus();
 							jTextArea.select(prevIdx, nextIdx);
 						} else {
-							//ë¬¸ì„œ?
+							//ë¬¸ì„œ?ï¿½ï¿½
 							jTextArea.select(0,-1);
 							cursorPositon=0;
 							startIdx=0;
@@ -92,7 +92,7 @@ public class TextPanel extends JPanel {
 						}
 
 						String executeSqlAtCurosr = jTextArea.getText().toString().substring(prevIdx, nextIdx);
-						System.out.println("[?‹¤?–‰SQL]"+executeSqlAtCurosr);
+						System.out.println("[?ï¿½ï¿½?ï¿½ï¿½SQL]"+executeSqlAtCurosr);
 						sql = executeSqlAtCurosr.replaceAll(";","");
 
 						//						System.out.println("[cursorLine]"+cursorLine + " cursorPositon:" + cursorPositon);
@@ -102,12 +102,12 @@ public class TextPanel extends JPanel {
 					}
 
 
-					//?“œ?ž˜ê·? ?„ ?ƒë¬¸ìž¥ ë³´ì—¬ì£¼ê¸°
+					//?ï¿½ï¿½?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ë¬¸ìž¥ ë³´ì—¬ì£¼ê¸°
 					String selectedText = jTextArea.getSelectedText();
 					if(selectedText != null) {
 						int startPoint = jTextArea.getSelectionStart();
 						int endPoint = jTextArea.getSelectionEnd();
-						System.out.println("[?“œ?ž˜ê·?] " + selectedText + "    " + startPoint + "," + endPoint);
+						System.out.println("[?ï¿½ï¿½?ï¿½ï¿½ï¿½?] " + selectedText + "    " + startPoint + "," + endPoint);
 						sql = selectedText.replaceAll(";","");
 					}
 
@@ -119,7 +119,7 @@ public class TextPanel extends JPanel {
 
 
 					//					System.out.println("===============================");
-					//					//?„¸ë¯¸ì½œë¡?(;) ?‹¨?œ„ë¡? sqlë¶„ë¦¬
+					//					//?ï¿½ï¿½ë¯¸ì½œï¿½?(;) ?ï¿½ï¿½?ï¿½ï¿½ï¿½? sqlë¶„ë¦¬
 					//					if(selectedText != null) {
 					//						String[] sqlArr = selectedText.split(";");
 					//						for(int i=0; i<sqlArr.length; i++) {
