@@ -87,15 +87,7 @@ public class LoginFrame extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() ==e.VK_ENTER) {
-					if(!(empNoTextField.getText().equals("") || empNoTextField.getText()==null)&&
-							!(pwTextField.getText().equals("") || empNoTextField.getText()==null)) {
-						empVo.setEmpno(Integer.parseInt(empNoTextField.getText()));
-						empVo.setPw(pwTextField.getText());
-						empService.select(empVo);
-
-						//JOptionPane.showMessageDialog(null, "id "+empNoTextField.getText()+" : pw "+pwTextField.getText());
-
-					}
+					chekcEmpFromDB(empVo);
 				}
 			}
 		});
@@ -107,23 +99,9 @@ public class LoginFrame extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {	
-				if(!(empNoTextField.getText().equals("") || empNoTextField.getText()==null)&&
-				      !(pwTextField.getText().equals("") || pwTextField.getText()==null)) {
-					empVo.setEmpno(Integer.parseInt(empNoTextField.getText()));
-					empVo.setPw(pwTextField.getText());
-					System.out.println(empService.select(empVo));
-					if(empVo.getEmpno() ==0) {
-						JOptionPane.showMessageDialog(null, "id && pw Check please");
-					}else {
-
-						SqlDeveloperMainFrame sqlFrame = new SqlDeveloperMainFrame();
-						setVisible(false);
-						sqlFrame.setVisible(true);
-					}
-				}else {
-					JOptionPane.showMessageDialog(null, "id && pw Check please");
-				}
+				chekcEmpFromDB(empVo);
 			}
+			
 		});
 		panel.add(loginButton);
 
@@ -139,4 +117,24 @@ public class LoginFrame extends JFrame {
 		panel.add(resetButton);
 	}
 
+	public void chekcEmpFromDB(EmpVO vo) {
+		
+		if(!(empNoTextField.getText().equals("") || empNoTextField.getText()==null)&&
+		   !(pwTextField.getText().equals("") || pwTextField.getText()==null)) {
+				empVo.setEmpno(Integer.parseInt(empNoTextField.getText()));
+				empVo.setPw(pwTextField.getText());
+				empVo = empService.select(empVo);
+				System.out.println(empVo);
+				if(empVo.getEmpno() ==0) {
+					JOptionPane.showMessageDialog(null, "id && pw Check please");
+				}else {
+					SqlDeveloperMainFrame sqlFrame = new SqlDeveloperMainFrame();
+					setVisible(false);
+					sqlFrame.setVisible(true);
+				}
+			}else {
+				JOptionPane.showMessageDialog(null, "id && pw Check please");
+			}
+		
+	}
 }
