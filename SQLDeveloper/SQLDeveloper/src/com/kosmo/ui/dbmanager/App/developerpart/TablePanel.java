@@ -20,12 +20,15 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import com.kosmo.ui.dbmanager.DBManager;
+import com.kosmo.ui.dbmanager.service.sql.SqlUsageService;
+import com.kosmo.ui.dbmanager.service.sql.impl.SqlUsageServiceImpl;
 
 public class TablePanel extends JPanel {
 
 	private JPanel contentPane;
 	JTable jTable;
 	DefaultTableModel defaultTableModel;
+	private SqlUsageService sqlService;
 	/**
 	 * Create the panel.
 	 */
@@ -35,66 +38,10 @@ public class TablePanel extends JPanel {
 		contentPane.setBorder(new EmptyBorder(5,5,5,5));
 		contentPane.setLayout(new BorderLayout(0, 0)); 
 
-		//		**************************************************
-		//		** JTABLE ?��?���? **
-		//		   방법1: ?��?��?��,컬럼명생?�� 							  -> JTable?��?��(?��?��?��[][], 컬럼[])
-		//		   방법2: ?��?��?��,컬럼명생?��  ?��  모델?�� ?��?��(?��?��?��[][], 컬럼[]) -> JTable?��?��(모델)
-		//			
-		//			모델?��?���?---------------------------------------
-		//			public DefaultTableModel(Object[][] data, Object[] columnNames) { }
-		//			public DefaultTableModel(Vector data, Vector columnNames) { }
-		//			----------------------------------------------
-		//		**************************************************
-
-		//----------------------------------------------
-		//방법1: new JTable(?��?��?��[][], 컬럼[])
-		//----------------------------------------------
-		//		Object[][] data = {
-		//				{"1","�??��",1000},
-		//				{"2","?��?��",2000},
-		//				{"3","박씨",3000}
-		//		};
-		//		String[] columnNames = {"EMPNO","ENAME","SAL"};
-		//		jTable =  new JTable(data, columnNames);
-
-
-
-		//---------------------------------------------
-		//방법2: ?��?��?��,컬럼명생?�� ?�� 모델?�� ?��?�� -> JTable?��?��(모델): ?��?��코딩 
-		//---------------------------------------------
-		//		Object[][] data = {
-		//				{"1","�??��",1000},
-		//				{"2","?��?��",2000},
-		//				{"3","박씨",3000}
-		//		};
-		//		String[] columnNames = {"EMPNO","ENAME","SAL"};
-		//		defaultTableModel = new DefaultTableModel(data, columnNames);
-		//		jTable = new JTable(defaultTableModel);
-
-
-
-
-		//---------------------------------------------
-		//방법2: ?��?��?��,컬럼명생?�� ?�� 모델?�� ?��?�� -> JTable?��?��(모델):  DB?��?�� �??��?���?(EMP?��?���? 고정)
-		//---------------------------------------------
-		//		String[] columnNames = {"EMPNO","ENAME","SAL"};
-		//		defaultTableModel= new DefaultTableModel(null, columnNames);	//컬럼:?��?��코딩
-		//		ArrayList<Vector<Object>> list = selectDataOnlyEmp();			//?��?��?��: EMP?��?���? 고정..
-		//		for(int i=0; i<list.size(); i++) {
-		//			defaultTableModel.addRow(list.get(i)); 
-		//		}
-		//		jTable = new JTable(defaultTableModel);
-
-
-
-		//---------------------------------------------
-		//방법2: ?��?��?��,컬럼명생?�� ?�� 모델?�� ?��?�� -> JTable?��?��(모델):  DB?��?�� �??��?���?(SQL?��?��결과)
-		//---------------------------------------------
+		
 		defaultTableModel = selectColumnAndData("select e.empno, e.ename, d.deptno, d.dname from emp e, dept d where e.deptno=d.deptno"); 	//컬럼,?��?��?��: sql?��?�� 결과 
 		jTable = new JTable(defaultTableModel);
-
-
-		//?��?��?�� ?��벤트
+		
 		ListSelectionModel rowSM = jTable.getSelectionModel();
 		rowSM.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		rowSM.addListSelectionListener(new ListSelectionListener() {
@@ -105,7 +52,7 @@ public class TablePanel extends JPanel {
 				}
 			}
 		});
-		//컬럼?��?�� ?��벤트
+
 		ListSelectionModel colSM = jTable.getColumnModel().getSelectionModel();
 		colSM.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		colSM.addListSelectionListener(new ListSelectionListener()
@@ -118,18 +65,6 @@ public class TablePanel extends JPanel {
 			}
 		});
 
-
-
-		//---------------------------------------------
-		//		기존 ?��?��?�� 초기?�� 방법
-		//		defaultTableModel.setNumRows(0);		
-		//      for (int i = 0; i < defaultTableModel.getRowCount(); i++) {
-		//      	defaultTableModel.removeRow(i);
-		//      }
-		//----------------------------------------------
-
-
-
 		JScrollPane jScollPane = new JScrollPane(jTable);
 		jScollPane.setPreferredSize(new Dimension(660,270));
 		contentPane.add(jScollPane);
@@ -140,17 +75,12 @@ public class TablePanel extends JPanel {
 	}
 
 
-	//------------------------------------------------------------
-	// ?��?��?��: EMP?��?���? 고정..
-	//------------------------------------------------------------
-	//public ArrayList<EmpVO> select() {
 	public ArrayList<Vector<Object>> selectDataOnlyEmp() {
 		Connection conn = null;
 		PreparedStatement pstmt =null;
 		ResultSet rs  = null;
 		DBManager db = new DBManager();
 
-		//ArrayList<EmpVO> list = new ArrayList<EmpVO>();
 		ArrayList<Vector<Object>> list = new ArrayList<Vector<Object>>();
 
 		try {
@@ -158,11 +88,6 @@ public class TablePanel extends JPanel {
 			pstmt = conn.prepareStatement("select empno, ename, sal from emp"); 
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				//				EmpVO vo = new EmpVO();
-				//				vo.setEmpno(rs.getInt("empno"));
-				//				vo.setEname(rs.getString("ename"));
-				//				vo.setSal(rs.getInt("sal"));
-				//				list.add(vo);
 				Vector<Object> vt = new Vector<Object>();
 				vt.addElement(rs.getInt("empno"));
 				vt.addElement(rs.getString("ename"));
@@ -178,9 +103,6 @@ public class TablePanel extends JPanel {
 	}
 
 
-	//------------------------------------------------------------
-	// 컬럼,?��?��?��: sql?��?�� 결과
-	//------------------------------------------------------------
 	public DefaultTableModel selectColumnAndData(String sql){
 		Vector<Vector<Object>> vtData = new Vector<Vector<Object>>();
 		Vector<String> vtColumnNames = new Vector<String>();
@@ -194,11 +116,9 @@ public class TablePanel extends JPanel {
 			ResultSetMetaData metaData = rs.getMetaData();
 			int columnCount = metaData.getColumnCount();	//컬럼�??��
 
-			//sql?��?��결과 컬럼�? -------------
 			for (int i=1; i <= columnCount; i++) {
 				vtColumnNames.add(metaData.getColumnLabel(i));	
 			}
-			//sql?��?��결과 ?��?��?�� -------------
 			while (rs.next()) {
 				Vector<Object> vtOneRow = new Vector<Object>();
 				for (int i=1; i <= columnCount; i++) {
@@ -210,6 +130,11 @@ public class TablePanel extends JPanel {
 			e.printStackTrace();
 		}
 		return new DefaultTableModel(vtData, vtColumnNames);
+	}
+	
+	public TablePanel(int result) {
+		sqlService = new SqlUsageServiceImpl();
+		
 	}
 
 }

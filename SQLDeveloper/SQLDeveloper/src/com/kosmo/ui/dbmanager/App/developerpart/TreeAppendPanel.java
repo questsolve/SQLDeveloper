@@ -1,6 +1,7 @@
 package com.kosmo.ui.dbmanager.App.developerpart;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Panel;
 import java.sql.Connection;
@@ -10,7 +11,13 @@ import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.TreeExpansionEvent;
+import javax.swing.event.TreeExpansionListener;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultTreeSelectionModel;
@@ -29,7 +36,7 @@ public class TreeAppendPanel extends Panel {
 	 * Launch the application.
 	 */
 	
-	public TreeAppendPanel() {
+	public TreeAppendPanel(TablePanel tablePanel) {
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -43,9 +50,44 @@ public class TreeAppendPanel extends Panel {
 		DefaultTreeModel model = new DefaultTreeModel(rootNode);
 		jTree = new JTree(model);	
 		jTree.setSelectionModel(treeSelectionModel);
-		
-		
+		jTree.addTreeSelectionListener(new TreeSelectionListener() {
+			@Override
+			public void valueChanged(TreeSelectionEvent e) {
+				DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode)e.getPath().getLastPathComponent();
+				if(selectedNode.isLeaf()) {
+					System.out.println("?��?�� ?��?��블명:" + selectedNode.getUserObject());
+					
+					//---------------------------------------------
+					//		기존 ?��?��?�� 초기?�� 방법
+					//		defaultTableModel.setNumRows(0);		
+					//      for (int i = 0; i < defaultTableModel.getRowCount(); i++) {
+					//      	defaultTableModel.removeRow(i);
+					//      }
+					//----------------------------------------------
+				
+					tablePanel.defaultTableModel.setNumRows(0);
+					DefaultTableModel vv = tablePanel.selectColumnAndData("select * from "+ selectedNode.getUserObject().toString()); 	//컬럼,?��?��?��: sql?��?�� 결과 
+					tablePanel.jTable.setModel(vv);
+					
+					
+				}
+			}
+		});
+		jTree.addTreeExpansionListener(new TreeExpansionListener() {
+			public void treeCollapsed(TreeExpansionEvent e) {
+				System.out.println("jTree ?��?��");
+
+			}
+			public void treeExpanded(TreeExpansionEvent e) {
+				System.out.println("jTree ?��쳐짐");
+			}
+		});
 		contentPane.add(jTree, BorderLayout.WEST);
+		JScrollPane jScollPane = new JScrollPane(jTree);
+		jScollPane.setPreferredSize(new Dimension(200,600));
+		contentPane.add(jScollPane);
+		add(contentPane, BorderLayout.WEST);
+
 	}
 	
 	public DefaultMutableTreeNode dbTreeData() {
@@ -80,8 +122,8 @@ public class TreeAppendPanel extends Panel {
 		return rootNode;
 	}
 	
-	public TreeAppendPanel(TablePanel tablePanel) {
-		this();
+	public TreeAppendPanel() {
+		
 	}
 
 }

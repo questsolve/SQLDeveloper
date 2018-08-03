@@ -162,7 +162,7 @@ public class TreePanel extends JPanel {
 		DBManager db = new DBManager();
 		Connection conn = db.dbConn();
 		String sql = "select tname from tab";
-		PreparedStatement pstmt;
+		PreparedStatement pstmt=null;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();

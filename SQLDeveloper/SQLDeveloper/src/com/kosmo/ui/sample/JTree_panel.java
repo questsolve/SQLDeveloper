@@ -34,7 +34,7 @@ public class JTree_panel extends JPanel {
 	JTree jTree;
 	
 	
-	public JTree_panel(JTable_panel tablePanel) { //<--?…Œ?´ë¸”íŒ¨?„ë³?ê²½ìœ„?•´ ì£¼ì†Œ ë°›ê¸°
+	public JTree_panel(JTable_panel tablePanel) { //<--?ï¿½ï¿½?ï¿½ï¿½ë¸”íŒ¨?ï¿½ï¿½ï¿½?ê²½ìœ„?ï¿½ï¿½ ì£¼ì†Œ ë°›ê¸°
 		
 		contentPane = new JPanel();
 //		contentPane.setBackground(Color.PINK);
@@ -44,55 +44,35 @@ public class JTree_panel extends JPanel {
 		DefaultTreeSelectionModel treeSelectionModel = new DefaultTreeSelectionModel(); 
 		treeSelectionModel.setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 
-		//		**************************************************
-		//		** JTREE ?‚¬?š©ë²? **
-		//		   : node?ƒ?„±  -> ëª¨ë¸?ƒ?„± -> JTree?ƒ?„±
-		//		**************************************************
-
-		//---------------------------------------------
-		//1. node?ƒ?„±: ?•˜?“œì½”ë”© ?…¸?“œ ?ƒ?„±
-		//---------------------------------------------
-		//		DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("XE");
-		//		DefaultMutableTreeNode childNode = null;		
-		//		 
-		//		childNode = new DefaultMutableTreeNode("TABLE");
-		//			childNode.add(new DefaultMutableTreeNode("EMP"));
-		//			childNode.add(new DefaultMutableTreeNode("DEPT"));
-		//		rootNode.add(childNode);
-		//		 
-		//		childNode = new DefaultMutableTreeNode("View");
-		//		    childNode.add(new DefaultMutableTreeNode("B1"));
-		//		    childNode.add(new DefaultMutableTreeNode("B2"));
-		//	    rootNode.add(childNode);
 
 
 		//---------------------------------------------
-		//1. node?ƒ?„±: DBê°’ìœ¼ë¡? ?…¸?“œ ?ƒ?„±
+		//1. node?ï¿½ï¿½?ï¿½ï¿½: DBê°’ìœ¼ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½
 		//---------------------------------------------
-		DefaultMutableTreeNode rootNode = dbTreeData();  // <----DBê°’ìœ¼ë¡? ?…¸?“œ ë§Œë“¤ê¸?
+		DefaultMutableTreeNode rootNode = dbTreeData();  // <----DBê°’ìœ¼ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ ë§Œë“¤ï¿½?
 
 		//---------------------------------------------
-		//2. ëª¨ë¸?ƒ?„±
+		//2. ëª¨ë¸?ï¿½ï¿½?ï¿½ï¿½
 		//---------------------------------------------
 		DefaultTreeModel model = new DefaultTreeModel(rootNode);
 
 		//---------------------------------------------
-		//3. JTree?ƒ?„±
+		//3. JTree?ï¿½ï¿½?ï¿½ï¿½
 		//---------------------------------------------
 		jTree = new JTree(model);	
-		jTree.setSelectionModel(treeSelectionModel);	//?‹¨?¼?„ ?ƒë§Œê??Š¥?•˜ê²?
+		jTree.setSelectionModel(treeSelectionModel);	//?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ë§Œï¿½??ï¿½ï¿½?ï¿½ï¿½ï¿½?
 
 
-		//?„ ?ƒ?´ë²¤íŠ¸
+		//?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ë²¤íŠ¸
 		jTree.addTreeSelectionListener(new TreeSelectionListener() {
 			@Override
 			public void valueChanged(TreeSelectionEvent e) {
 				DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode)e.getPath().getLastPathComponent();
 				if(selectedNode.isLeaf()) {
-					System.out.println("?„ ?ƒ ?…Œ?´ë¸”ëª…:" + selectedNode.getUserObject());
+					System.out.println("?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ë¸”ëª…:" + selectedNode.getUserObject());
 					
 					//---------------------------------------------
-					//		ê¸°ì¡´ ?°?´?„° ì´ˆê¸°?™” ë°©ë²•
+					//		ê¸°ì¡´ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ì´ˆê¸°?ï¿½ï¿½ ë°©ë²•
 					//		defaultTableModel.setNumRows(0);		
 					//      for (int i = 0; i < defaultTableModel.getRowCount(); i++) {
 					//      	defaultTableModel.removeRow(i);
@@ -100,45 +80,25 @@ public class JTree_panel extends JPanel {
 					//----------------------------------------------
 				
 					tablePanel.defaultTableModel.setNumRows(0);
-					DefaultTableModel vv = tablePanel.selectColumnAndData("select * from "+ selectedNode.getUserObject().toString()); 	//ì»¬ëŸ¼,?°?´?„°: sql?‹¤?–‰ ê²°ê³¼ 
+					DefaultTableModel vv = tablePanel.selectColumnAndData("select * from "+ selectedNode.getUserObject().toString()); 	//ì»¬ëŸ¼,?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½: sql?ï¿½ï¿½?ï¿½ï¿½ ê²°ê³¼ 
 					tablePanel.jTable.setModel(vv);
 					
 					
 				}
 			}
 		});
-		//?¼ì¹?,? ‘?˜ ?´ë²¤íŠ¸
+		//?ï¿½ï¿½ï¿½?,?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ë²¤íŠ¸
 		jTree.addTreeExpansionListener(new TreeExpansionListener() {
 			public void treeCollapsed(TreeExpansionEvent e) {
-				System.out.println("jTree ? ‘?˜");
+				System.out.println("jTree ?ï¿½ï¿½?ï¿½ï¿½");
 
 			}
 			public void treeExpanded(TreeExpansionEvent e) {
-				System.out.println("jTree ?¼ì³ì§");
+				System.out.println("jTree ?ï¿½ï¿½ì³ì§");
 			}
 		});
 
 
-		//		
-		//		JEditorPane editorPane = new JEditorPane();
-		//		contentPane.add(editorPane, BorderLayout.CENTER);
-		//		
-		//		JEditorPane editorPane_1 = new JEditorPane();
-		//		contentPane.add(editorPane_1, BorderLayout.SOUTH);
-		//		
-		//		JPanel panel = new JPanel();
-		//		contentPane.add(panel, BorderLayout.NORTH);
-		//		
-
-
-		//		JButton btnRun = new JButton("RUN");
-		//		btnRun.addActionListener(new ActionListener() {
-		//			public void actionPerformed(ActionEvent e) {
-		//				System.out.println("btn click");
-		//			}
-		//		});
-		//		panel.add(btnRun);
-		
 		
 		JScrollPane jScollPane = new JScrollPane(jTree);
 		jScollPane.setPreferredSize(new Dimension(200,600));
@@ -153,7 +113,7 @@ public class JTree_panel extends JPanel {
 		DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("XE");
 		DefaultMutableTreeNode childNode = null;
 
-		//--------------- DB?—?„œ ê°?? ¸?˜¨ ?…Œ?´ë¸? ëª©ë¡
+		//--------------- DB?ï¿½ï¿½?ï¿½ï¿½ ï¿½??ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ï¿½? ëª©ë¡
 		childNode = new DefaultMutableTreeNode("Table");
 		DBManager db = new DBManager();
 		Connection conn = db.dbConn();

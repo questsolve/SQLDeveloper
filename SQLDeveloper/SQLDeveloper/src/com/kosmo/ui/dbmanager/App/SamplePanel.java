@@ -6,31 +6,44 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JScrollPane;
-import javax.swing.JTree;
+
+import com.kosmo.ui.dbmanager.App.developerpart.EmpPanel;
+import com.kosmo.ui.dbmanager.App.developerpart.MenuJMenuBar;
+import com.kosmo.ui.dbmanager.App.developerpart.TablePanel;
+import com.kosmo.ui.dbmanager.App.developerpart.TextPanel;
+import com.kosmo.ui.dbmanager.App.developerpart.TreeAppendPanel;
+import com.kosmo.ui.dbmanager.service.domain.EmpVO;
+import com.kosmo.ui.dbmanager.service.emp.impl.EmpServiceImpl;
+
 import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.BoxLayout;
-import java.awt.GridLayout;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.JEditorPane;
+
+import java.awt.Color;
+import javax.swing.border.LineBorder;
 
 public class SamplePanel extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTable table;
+	JPanel centerPanel;
+	JPanel tablPanel;
+	JPanel resultPanel;
+	private JPanel UserPanel;
 
 	/**
 	 * Launch the application.
 	 */
+	///*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SamplePanel frame = new SamplePanel();
+					EmpServiceImpl empServiceImpl = new EmpServiceImpl();
+					EmpVO vo = new EmpVO();
+					vo.setEmpno(1);
+					vo.setPw("1234");
+					
+					vo = empServiceImpl.select(vo);
+					System.out.println(vo);
+					SamplePanel frame = new SamplePanel(vo);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,53 +51,57 @@ public class SamplePanel extends JFrame {
 			}
 		});
 	}
-
+//*/
 	/**
 	 * Create the frame.
 	 */
-	public SamplePanel() {
+	public SamplePanel(EmpVO vo) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		
-		JMenuBar menuBar = new JMenuBar();
+		setBounds(100, 100, 1200, 675);
+
+		JMenuBar menuBar = new MenuJMenuBar(this);
 		setJMenuBar(menuBar);
 		
-		JMenu mnFile = new JMenu("File");
-		menuBar.add(mnFile);
-		
-		JMenu mnEdit = new JMenu("Edit");
-		menuBar.add(mnEdit);
+
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(5, 5));
+		
+		TablePanel BottomPanel = new TablePanel();
+
+		
+		TextPanel textPanel = new TextPanel(centerPanel,BottomPanel);
+		textPanel.setBorder(null);
+
+		centerPanel = new JPanel();
+		centerPanel.setBackground(Color.WHITE);
+
+		contentPane.add(centerPanel, BorderLayout.CENTER);
+		
+		centerPanel.setLayout(new BorderLayout(5, 5));
+		centerPanel.add(textPanel, BorderLayout.CENTER);
+
+		centerPanel.add(BottomPanel, BorderLayout.SOUTH);
+
 		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JPanel treePanel = new JPanel();
+		TreeAppendPanel treePanel = new TreeAppendPanel(BottomPanel);
+		
+		tablPanel = new JPanel();
+		BottomPanel.add(tablPanel);
+		
+		resultPanel = new JPanel();
+		BottomPanel.add(resultPanel);
 		contentPane.add(treePanel, BorderLayout.WEST);
-		treePanel.setLayout(new BorderLayout(0, 0));
 		
-		JTree tree = new JTree();
-		treePanel.add(tree);
+		UserPanel = new EmpPanel(vo, BottomPanel);
+		UserPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		centerPanel.add(UserPanel, BorderLayout.EAST);
 		
-		JPanel textPanel = new JPanel();
-		contentPane.add(textPanel, BorderLayout.CENTER);
 		
-		textField = new JTextField();
-		textField.setHorizontalAlignment(SwingConstants.TRAILING);
-		textPanel.add(textField);
-		textField.setColumns(10);
+
 		
-		JPanel tablePanel = new JPanel();
-		contentPane.add(tablePanel, BorderLayout.SOUTH);
-		
-		table = new JTable();
-		tablePanel.add(table);
-		
-		JPanel empPanel = new JPanel();
-		contentPane.add(empPanel, BorderLayout.EAST);
-		
-		JEditorPane editorPane = new JEditorPane();
-		empPanel.add(editorPane);
 	}
 
 }
