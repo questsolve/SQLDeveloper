@@ -72,22 +72,13 @@ public class EmpPanel extends JPanel {
 		});
 
 		if(vo.getAuth()==3) {
-			JPanel dbaTab = new JPanel();
-			tabbedPane.addTab("DBA", null, dbaTab, null);
 
-
-			JButton checkEmpList = new JButton("EmployeeList");
-			dbaTab.add(checkEmpList);
-
-			JButton checkQueryList = new JButton("CheckUsedQuery");
-			dbaTab.add(checkQueryList);
-			
 			JPanel dbaEmp = new JPanel();
-			tabbedPane.addTab("DBA_EMP", null, dbaEmp, null);
-			
+			tabbedPane.addTab("DBA", null, dbaEmp, null);
+
 			JButton addNewEmp = new JButton("AddNewUser");
 			dbaEmp.add(addNewEmp);
-			
+
 			JButton updateAuth = new JButton("UpdateAuth");
 			updateAuth.addMouseListener(new MouseAdapter() {
 				@Override
@@ -101,22 +92,11 @@ public class EmpPanel extends JPanel {
 				public void mouseClicked(MouseEvent e) {
 					InsertEmpFrame insertFrame = new InsertEmpFrame();
 					insertFrame.setVisible(true);
-					
+
 				}
 			});
-			
-			checkQueryList.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					JOptionPane.showMessageDialog(null,"check Which Query Used");
-				}
-			});
-			checkEmpList.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					JOptionPane.showMessageDialog(null,"check Who use this DB");
-				}
-			});
+
+
 		}
 
 	}
@@ -143,6 +123,6 @@ public class EmpPanel extends JPanel {
 
 		return sb.toString();
 	}
-	
-	 
+
+
 }
