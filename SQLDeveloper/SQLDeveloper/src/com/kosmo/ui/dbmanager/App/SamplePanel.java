@@ -95,13 +95,10 @@ public class SamplePanel extends JFrame {
 		BottomPanel.add(resultPanel);
 		contentPane.add(treePanel, BorderLayout.WEST);
 		
-		UserPanel = new EmpPanel(vo, BottomPanel);
+		UserPanel = new EmpPanel(vo, BottomPanel,this);
 		UserPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		centerPanel.add(UserPanel, BorderLayout.EAST);
-		
-		
-
-		
+				
 	}
 
 }

@@ -66,7 +66,7 @@ public class EmpDaoImpl implements EmpDao {
 		PreparedStatement pstate = null;
 		StringBuilder sb = new StringBuilder();
 		sb.append(	"INSERT INTO devemp(empno,pw,iswork,job,deptno,auth,empname)");
-		sb.append("VALUES(devemp_seq.nextval,?,1,?,?,1,?)");
+		sb.append("VALUES(devemp_seq.nextval,?,1,?,?,?,?)");
 		
 		try {
 			con = dbm.dbConn();
@@ -74,7 +74,8 @@ public class EmpDaoImpl implements EmpDao {
 			pstate.setString(1, vo.getPw());
 			pstate.setString(2, vo.getJob());
 			pstate.setInt(3, vo.getDeptno());
-			pstate.setString(4, vo.getEmpName());
+			pstate.setInt(4, vo.getAuth());
+			pstate.setString(5, vo.getEmpName());
 			
 			result = pstate.executeUpdate();
 		} catch (SQLException e) {

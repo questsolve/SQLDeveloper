@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SpringLayout;
 
+import com.kosmo.ui.dbmanager.App.LoginFrame;
 import com.kosmo.ui.dbmanager.service.domain.EmpVO;
 import com.kosmo.ui.dbmanager.service.emp.EmpService;
 import com.kosmo.ui.dbmanager.service.sql.SqlUsageService;
@@ -13,6 +14,8 @@ import javax.swing.JOptionPane;
 
 import java.awt.BorderLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.BoxLayout;
@@ -26,11 +29,11 @@ public class EmpPanel extends JPanel {
 
 	private EmpService empService;
 	private SqlUsageService sqlService;
-
+	private String sql;
 	/**
 	 * Create the panel.
 	 */
-	public EmpPanel(EmpVO vo,TablePanel tablePanel) {
+	public EmpPanel(EmpVO vo,TablePanel tablePanel, JFrame frame) {
 
 
 		setLayout(new BorderLayout(0, 0));
@@ -57,8 +60,8 @@ public class EmpPanel extends JPanel {
 		LogOut.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JOptionPane.showMessageDialog(null,"LOGOUT");
-
+				frame.setVisible(false);
+				(new LoginFrame()).setVisible(true);
 			}
 		});
 		downExcel.addMouseListener(new MouseAdapter() {
@@ -96,7 +99,9 @@ public class EmpPanel extends JPanel {
 			addNewEmp.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					JOptionPane.showMessageDialog(null,"INSERT NEW User");
+					InsertEmpFrame insertFrame = new InsertEmpFrame();
+					insertFrame.setVisible(true);
+					
 				}
 			});
 			
@@ -138,4 +143,6 @@ public class EmpPanel extends JPanel {
 
 		return sb.toString();
 	}
+	
+	 
 }
