@@ -28,7 +28,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import com.kosmo.ui.dbmanager.service.common.DBManager;
+import com.kosmo.ui.developer.service.common.DBManager;
 
 public class JTable_panel extends JPanel {
 

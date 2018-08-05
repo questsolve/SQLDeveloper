@@ -1,6 +1,6 @@
 package com.kosmo.ui.test;
 
-import com.kosmo.ui.dbmanager.service.domain.EmpVO;
+import com.kosmo.ui.developer.service.domain.EmpVO;
 
 public class ClassTest {
 
