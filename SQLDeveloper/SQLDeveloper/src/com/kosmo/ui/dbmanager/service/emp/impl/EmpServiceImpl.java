@@ -1,5 +1,7 @@
 package com.kosmo.ui.dbmanager.service.emp.impl;
 
+import java.util.List;
+
 import com.kosmo.ui.dbmanager.service.domain.EmpVO;
 import com.kosmo.ui.dbmanager.service.emp.EmpDao;
 import com.kosmo.ui.dbmanager.service.emp.EmpService;
@@ -34,4 +36,13 @@ public class EmpServiceImpl implements EmpService {
 		return empDao.delete(vo);
 	}
 	
+	public List<EmpVO> selectAllEmp(String sql){
+		return empDao.selectAllEmp(sql);
+	}
+	public List<String> getColumnName(String sql){
+		return empDao.getColumnName(sql);
+	}
+	public EmpVO select(int empNo) {
+		return empDao.select(empNo);
+	}
 }

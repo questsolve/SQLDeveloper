@@ -3,7 +3,10 @@ package com.kosmo.ui.dbmanager.service.emp.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.kosmo.ui.dbmanager.DBManager;
 import com.kosmo.ui.dbmanager.service.domain.EmpVO;
@@ -58,6 +61,47 @@ public class EmpDaoImpl implements EmpDao {
 		return vo;
 	}
 
+	public EmpVO select(int empNo){
+		DBManager dbm = new DBManager();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		EmpVO vo = new EmpVO();
+
+		try {
+			con = dbm.dbConn();
+			StringBuilder sb = new StringBuilder();
+			sb.append("SELECT e.empno,e.pw,e.iswork,e.job,d.deptno,e.auth,d.deptname,e.empname");
+			sb.append(" FROM devemp e, devdept d");
+			sb.append(" WHERE e.deptno = d.deptno");
+			sb.append(" AND iswork =1");
+			sb.append(" AND empno = ?");
+			pstmt = con.prepareStatement(sb.toString());
+			pstmt.setInt(1, empNo);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				vo.setAuth(rs.getInt("auth"));
+				vo.setDeptName(rs.getString("deptname"));
+				vo.setDeptno(rs.getInt("deptno"));
+				vo.setEmpName(rs.getString("empname"));
+				vo.setEmpno(rs.getInt("empno"));
+				vo.setIsWork(rs.getInt("iswork"));
+				vo.setJob(rs.getString("job"));
+				vo.setPw(rs.getString("pw"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			dbm.dbClose(con, pstmt, rs);
+		}
+
+
+
+		return vo;
+	}
+	
+	
 	//INSERT
 	public int insert(EmpVO vo) {
 		int result =0;
@@ -177,5 +221,68 @@ public class EmpDaoImpl implements EmpDao {
 		
 		return result;
 
+	}
+	
+	public List<EmpVO> selectAllEmp(String sql){
+		DBManager dbm = new DBManager();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<EmpVO> empList = new ArrayList<EmpVO>();
+
+		try {
+			con = dbm.dbConn();
+			StringBuilder sb = new StringBuilder();
+			sb.append("SELECT e.empno,e.iswork,d.deptno,e.auth,d.deptname,e.empname");
+			sb.append(" FROM devemp e, devdept d");
+			pstmt = con.prepareStatement(sb.toString());
+			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				EmpVO vo = new EmpVO();
+				vo.setAuth(rs.getInt("auth"));
+				vo.setDeptName(rs.getString("deptname"));
+				vo.setDeptno(rs.getInt("deptno"));
+				vo.setEmpName(rs.getString("empname"));
+				vo.setEmpno(rs.getInt("empno"));
+				vo.setIsWork(rs.getInt("iswork"));
+				vo.setJob(rs.getString("job"));
+				empList.add(vo);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			dbm.dbClose(con, pstmt, rs);
+		}
+
+		return empList;
+	}
+	
+	public List<String> getColumnName(String sql){
+		List<String> list = new ArrayList<String>();
+		Connection con = null;
+		PreparedStatement pstate = null;
+		ResultSet rs = null;
+		DBManager cm = new DBManager();
+		//String sql = "SELECT empno,ename,job,mgr,hiredate,sal,comm,deptno FROM empcp";
+		ResultSetMetaData rsmd = null;
+		try {
+			con = cm.dbConn();
+			pstate = con.prepareStatement(sql);
+			
+			rs = pstate.executeQuery();
+			rsmd = rs.getMetaData();
+			
+			for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+				list.add(rsmd.getColumnLabel(i));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			cm.dbClose(con, pstate,rs);
+		}
+		return list;
 	}
 }

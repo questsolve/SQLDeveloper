@@ -24,6 +24,7 @@ import javax.swing.tree.DefaultTreeSelectionModel;
 import javax.swing.tree.TreeSelectionModel;
 
 import com.kosmo.ui.dbmanager.DBManager;
+import com.kosmo.ui.dbmanager.service.domain.EmpVO;
 
 import javax.swing.JTree;
 
@@ -31,13 +32,13 @@ public class TreeAppendPanel extends Panel {
 
 	private JPanel contentPane;
 	JTree jTree;
-
+	private EmpVO vo;
 	/**
 	 * Launch the application.
 	 */
 	
-	public TreeAppendPanel(TablePanel tablePanel) {
-		
+	public TreeAppendPanel(TablePanel tablePanel, EmpVO vo) {
+		this.vo = vo;
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -68,7 +69,7 @@ public class TreeAppendPanel extends Panel {
 					tablePanel.defaultTableModel.setNumRows(0);
 					DefaultTableModel vv = tablePanel.selectColumnAndData("select * from "+ selectedNode.getUserObject().toString()); 	//컬럼,?��?��?��: sql?��?�� 결과 
 					tablePanel.jTable.setModel(vv);
-					
+					tablePanel.setVisible(true);
 					
 				}
 			}
@@ -106,7 +107,15 @@ public class TreeAppendPanel extends Panel {
 			pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-				childNode.add(new DefaultMutableTreeNode(rs.getString("tname")));  
+				if(vo.getAuth()!=3) {
+					String tn= rs.getString("tname");
+					if(!(tn.contains("EMP") 
+					   ||tn.contains("QUERY") ||tn.contains("USAGE") || tn.contains("USER"))) {
+						childNode.add(new DefaultMutableTreeNode(rs.getString("tname")));
+					}
+				}else {
+					childNode.add(new DefaultMutableTreeNode(rs.getString("tname")));
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

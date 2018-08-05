@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -14,6 +15,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.BadLocationException;
 
+import com.kosmo.ui.dbmanager.service.domain.EmpVO;
+import com.kosmo.ui.dbmanager.service.domain.SqlUsageVO;
+import com.kosmo.ui.dbmanager.service.sql.SqlUsageService;
+import com.kosmo.ui.dbmanager.service.sql.impl.SqlUsageServiceImpl;
 import com.kosmo.ui.sample.JTable_panel;
 
 public class TextPanel extends JPanel {
@@ -21,11 +26,14 @@ public class TextPanel extends JPanel {
 	private JPanel contentPane;
 	JTextArea jTextArea;
 	String sql = "";
+	private JPanel alertPanel = new JPanel();
+	JTextArea textArea = new JTextArea();
+	private SqlUsageService sqlService;
 	/**
 	 * Create the panel.
 	 */
 
-	public TextPanel(JPanel centerPanel,TablePanel tablePanel) {
+	public TextPanel(JPanel centerPanel,JFrame parentsFrame,TablePanel tablePanel,EmpVO vo) {
 		setBorder(new EmptyBorder(5, 5, 5, 5));  
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(15,15,15,15));
@@ -43,7 +51,7 @@ public class TextPanel extends JPanel {
 			//ctrl+enter
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER && e.getModifiers() ==KeyEvent.CTRL_MASK) {
-
+					tablePanel.setVisible(false);
 					System.out.println("===============================");
 					try {
 
@@ -92,15 +100,30 @@ public class TextPanel extends JPanel {
 					}
 
 					if(sql.toUpperCase().startsWith("SELECT")) {
+						
 						System.out.println("SELECT");
 
 						tablePanel.defaultTableModel.setNumRows(0);
 						DefaultTableModel vv = tablePanel.selectColumnAndData(sql); 
 						tablePanel.jTable.setModel(vv);
-
-					}else {
-						System.out.println("");
+						textArea.setVisible(false);
+						tablePanel.setVisible(true);
+						saveSQL(sql, vo);
 						
+						
+					}else {
+						if(vo.getAuth()!=3) {
+							
+							alertPanel.setLayout(new BorderLayout(0, 0));
+							
+							textArea.setText("Out of your Auth");
+							textArea.setVisible(true);
+							alertPanel.add(textArea);
+							parentsFrame.add(alertPanel,BorderLayout.SOUTH);
+							
+						}else {
+							saveSQL(sql, vo);
+						}
 					}
 
 
@@ -119,6 +142,13 @@ public class TextPanel extends JPanel {
 
 	}
 
+	private void saveSQL(String sql, EmpVO vo) {
+		sqlService = new SqlUsageServiceImpl();
+		SqlUsageVO sqlVo = new SqlUsageVO();
+		sqlVo.setEmp(vo);
+		sqlVo.setUseQuery(sql);
+		sqlService.insert(sqlVo);
+	}
 }
 
 

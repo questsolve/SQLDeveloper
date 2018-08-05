@@ -193,4 +193,37 @@ public class SqlUsageDaoImpl implements SqlUsageDao {
 		return list;
 	}
 	
+	public SqlUsageVO selectBySQL(String sql, EmpVO vo) {
+		Connection con = null;
+		PreparedStatement pstate = null;
+		ResultSet rs = null;
+		String query = "";
+		DBManager dbm = new DBManager();
+		StringBuilder sb = new StringBuilder("SELECT usedquery,usageno,downloadcount");
+		sb.append(" FROM freusage");
+		sb.append(" WHERE USEDQUERY = ?");
+		sb.append(" AND empno = ?");
+		SqlUsageVO sqlVO = new SqlUsageVO();
+		try {
+			con =dbm.dbConn();
+			pstate = con.prepareStatement(sb.toString());
+			pstate.setString(1, sql);
+			pstate.setInt(2, vo.getEmpno());
+			rs = pstate.executeQuery();
+			while(rs.next()) {
+				sqlVO.setEmp(vo);
+				sqlVO.setUsageNo(rs.getInt("usageno"));
+				sqlVO.setUseQuery(rs.getString("usedquery"));
+				sqlVO.setDownloadCount(rs.getInt("downloadcount"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			dbm.dbClose(con, pstate, rs);
+		}
+		return sqlVO;
+	}
+	
+	
 }

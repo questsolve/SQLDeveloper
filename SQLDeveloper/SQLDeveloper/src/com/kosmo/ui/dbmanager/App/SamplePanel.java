@@ -25,7 +25,6 @@ public class SamplePanel extends JFrame {
 	private JPanel contentPane;
 	JPanel centerPanel;
 	JPanel tablPanel;
-	JPanel resultPanel;
 	private JPanel UserPanel;
 
 	/**
@@ -71,7 +70,7 @@ public class SamplePanel extends JFrame {
 		TablePanel BottomPanel = new TablePanel();
 
 		
-		TextPanel textPanel = new TextPanel(centerPanel,BottomPanel);
+		TextPanel textPanel = new TextPanel(centerPanel,this,BottomPanel,vo);
 		textPanel.setBorder(null);
 
 		centerPanel = new JPanel();
@@ -86,16 +85,14 @@ public class SamplePanel extends JFrame {
 
 		setContentPane(contentPane);
 		
-		TreeAppendPanel treePanel = new TreeAppendPanel(BottomPanel);
+		TreeAppendPanel treePanel = new TreeAppendPanel(BottomPanel,vo);
 		
 		tablPanel = new JPanel();
 		BottomPanel.add(tablPanel);
-		
-		resultPanel = new JPanel();
-		BottomPanel.add(resultPanel);
+		BottomPanel.setVisible(false);
 		contentPane.add(treePanel, BorderLayout.WEST);
 		
-		UserPanel = new EmpPanel(vo, BottomPanel,this);
+		UserPanel = new EmpPanel(vo, BottomPanel,this,textPanel);
 		UserPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		centerPanel.add(UserPanel, BorderLayout.EAST);
 				

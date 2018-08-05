@@ -6,8 +6,11 @@ import javax.swing.SpringLayout;
 
 import com.kosmo.ui.dbmanager.App.LoginFrame;
 import com.kosmo.ui.dbmanager.service.domain.EmpVO;
+import com.kosmo.ui.dbmanager.service.domain.SqlUsageVO;
 import com.kosmo.ui.dbmanager.service.emp.EmpService;
+import com.kosmo.ui.dbmanager.service.emp.impl.EmpServiceImpl;
 import com.kosmo.ui.dbmanager.service.sql.SqlUsageService;
+import com.kosmo.ui.dbmanager.service.sql.impl.SqlUsageServiceImpl;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,9 +21,19 @@ import javax.swing.JFrame;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import java.awt.FlowLayout;
@@ -33,7 +46,7 @@ public class EmpPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public EmpPanel(EmpVO vo,TablePanel tablePanel, JFrame frame) {
+	public EmpPanel(EmpVO vo,TablePanel tablePanel, JFrame frame,TextPanel textPanal) {
 
 
 		setLayout(new BorderLayout(0, 0));
@@ -67,6 +80,12 @@ public class EmpPanel extends JPanel {
 		downExcel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				String sql = textPanal.sql;
+				System.out.println("emp"+sql);
+				downloadSQL(sql);
+				sqlService = new SqlUsageServiceImpl();
+				SqlUsageVO sqlVO = sqlService.selectBySQL(sql, vo);
+				sqlService.updateDownloadCount(sqlVO);
 				JOptionPane.showMessageDialog(null,"download Table By Excel in your PC");
 			}
 		});
@@ -83,7 +102,9 @@ public class EmpPanel extends JPanel {
 			updateAuth.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					JOptionPane.showMessageDialog(null,"update Authority");
+					UpdateFrame frame = new UpdateFrame();
+					frame.setVisible(true);
+
 				}
 			});
 			dbaEmp.add(updateAuth);
@@ -124,5 +145,65 @@ public class EmpPanel extends JPanel {
 		return sb.toString();
 	}
 
+	private void downloadSQL(String sql) {
+		String path = "C:\\Users\\kosmo05\\Desktop\\excelFromDB";
+		String fileName = "dbEmployee.xls";
+		empService = new EmpServiceImpl();
+		sqlService = new SqlUsageServiceImpl();
+
+		XSSFWorkbook workbook = new XSSFWorkbook();
+		XSSFSheet sheet = workbook.createSheet("DBdata");
+		XSSFRow row = null;
+
+		row=sheet.createRow(1);
+
+		List<Map> ColAndData = sqlService.selectByQuery(sql);
+
+		Map column = (Map)ColAndData.get(0);
+		List colNames = (List)column.get("column");
+		System.out.println(colNames);
+
+		for (int i = 0; i < colNames.size(); i++) {
+			row.createCell(i+1).setCellValue(colNames.get(i).toString());
+
+		}
+
+		for (int i = 1; i < ColAndData.size(); i++) {
+			row= sheet.createRow(i+1);
+			for (int j = 0; j < colNames.size(); j++) {
+				row.createCell(1).setCellValue((ColAndData.get(i)).toString());			
+			}
+		}
+
+		FileOutputStream outFile=null;
+		try {
+			outFile = new FileOutputStream(path+"\\"+fileName);
+			workbook.write(outFile);
+
+			outFile.close();
+
+
+
+			System.out.println("���ϻ��� �Ϸ�");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}finally {
+			try {
+				workbook.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+
+
+
+
+
+	}
 
 }

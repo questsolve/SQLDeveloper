@@ -87,6 +87,11 @@ public class InsertEmpFrame extends JFrame {
 		panel.add(departmentLabel);
 
 		JComboBox<String> departComboBox = new JComboBox<String>();
+		departComboBox.insertItemAt("개발총괄팀",0);
+		departComboBox.insertItemAt("개발1팀",1);
+		departComboBox.insertItemAt("개발2팀",2);
+		departComboBox.insertItemAt("개발3팀",3);
+		departComboBox.insertItemAt("개발4팀",4);
 		panel.add(departComboBox);
 
 		JLabel jobLabel = new JLabel("Job");
@@ -100,6 +105,9 @@ public class InsertEmpFrame extends JFrame {
 		panel.add(authorityLabel);
 
 		authComboBox = new JComboBox<String>();
+		authComboBox.insertItemAt("일반사원", 0);
+		authComboBox.insertItemAt("팀장급", 1);
+		authComboBox.insertItemAt("DBA", 2);
 		panel.add(authComboBox);
 
 		JPanel utilPanel = new JPanel();
@@ -180,14 +188,8 @@ public class InsertEmpFrame extends JFrame {
 			}
 		});
 		utilPanel.add(btnNewButton_1);
-		authComboBox.insertItemAt("일반사원", 0);
-		authComboBox.insertItemAt("팀장급", 1);
-		authComboBox.insertItemAt("DBA", 2);
-		departComboBox.insertItemAt("개발총괄팀",0);
-		departComboBox.insertItemAt("개발1팀",1);
-		departComboBox.insertItemAt("개발2팀",2);
-		departComboBox.insertItemAt("개발3팀",3);
-		departComboBox.insertItemAt("개발4팀",4);
+		
+		
 	}
 
 }

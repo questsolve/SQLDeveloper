@@ -13,4 +13,5 @@ public interface SqlUsageDao {
 	public int updateDownloadCount(SqlUsageVO sqlUsageVO);
 	public String selectQuery(SqlUsageVO sqlUsageVO);
 	public List<Map> selectByQuery(String sql);
+	public SqlUsageVO selectBySQL(String sql, EmpVO vo);
 }

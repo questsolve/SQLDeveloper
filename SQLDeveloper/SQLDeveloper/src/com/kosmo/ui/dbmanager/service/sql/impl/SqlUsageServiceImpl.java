@@ -41,5 +41,9 @@ public class SqlUsageServiceImpl implements SqlUsageService {
 	public List<Map> selectByQuery(String sql) {
 		return sqlUsageDao.selectByQuery(sql);
 	}
+	
+	public SqlUsageVO selectBySQL(String sql, EmpVO vo) {
+		return sqlUsageDao.selectBySQL(sql, vo);
+	}
 
 }

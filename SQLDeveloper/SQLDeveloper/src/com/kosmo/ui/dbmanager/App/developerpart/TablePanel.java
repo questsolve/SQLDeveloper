@@ -27,6 +27,7 @@ public class TablePanel extends JPanel {
 
 	private JPanel contentPane;
 	JTable jTable;
+	JPanel panel;
 	DefaultTableModel defaultTableModel;
 	private SqlUsageService sqlService;
 	/**
