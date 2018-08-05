@@ -126,7 +126,7 @@ public class LoginFrame extends JFrame {
 				if(empVo.getEmpno() ==0) {
 					JOptionPane.showMessageDialog(null, "id && pw Check please");
 				}else {
-					MainPanel sqlFrame = new MainPanel(empVo);
+					MainFrame sqlFrame = new MainFrame(empVo);
 					setVisible(false);
 					sqlFrame.setVisible(true);
 				}
