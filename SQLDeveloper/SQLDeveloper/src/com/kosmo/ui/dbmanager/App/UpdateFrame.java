@@ -1,4 +1,4 @@
-package com.kosmo.ui.dbmanager.App.developerpart;
+package com.kosmo.ui.dbmanager.App;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

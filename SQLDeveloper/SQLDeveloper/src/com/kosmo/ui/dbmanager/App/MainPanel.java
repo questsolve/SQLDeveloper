@@ -7,11 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.kosmo.ui.dbmanager.App.developerpart.EmpPanel;
-import com.kosmo.ui.dbmanager.App.developerpart.MenuJMenuBar;
-import com.kosmo.ui.dbmanager.App.developerpart.TablePanel;
-import com.kosmo.ui.dbmanager.App.developerpart.TextPanel;
-import com.kosmo.ui.dbmanager.App.developerpart.TreeAppendPanel;
+import com.kosmo.ui.dbmanager.App.mainframepart.EmpPanel;
+import com.kosmo.ui.dbmanager.App.mainframepart.MenuJMenuBar;
+import com.kosmo.ui.dbmanager.App.mainframepart.TablePanel;
+import com.kosmo.ui.dbmanager.App.mainframepart.TextPanel;
+import com.kosmo.ui.dbmanager.App.mainframepart.TreeAppendPanel;
 import com.kosmo.ui.dbmanager.service.domain.EmpVO;
 import com.kosmo.ui.dbmanager.service.emp.impl.EmpServiceImpl;
 

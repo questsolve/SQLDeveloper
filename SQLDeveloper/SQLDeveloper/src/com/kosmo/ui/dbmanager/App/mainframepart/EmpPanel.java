@@ -1,10 +1,12 @@
-package com.kosmo.ui.dbmanager.App.developerpart;
+package com.kosmo.ui.dbmanager.App.mainframepart;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SpringLayout;
 
+import com.kosmo.ui.dbmanager.App.InsertEmpFrame;
 import com.kosmo.ui.dbmanager.App.LoginFrame;
+import com.kosmo.ui.dbmanager.App.UpdateFrame;
 import com.kosmo.ui.dbmanager.service.domain.EmpVO;
 import com.kosmo.ui.dbmanager.service.domain.SqlUsageVO;
 import com.kosmo.ui.dbmanager.service.emp.EmpService;

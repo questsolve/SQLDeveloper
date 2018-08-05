@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.kosmo.ui.dbmanager.App.developerpart.MenuPanel;
+import com.kosmo.ui.dbmanager.App.mainframepart.MenuPanel;
 import com.kosmo.ui.dbmanager.service.domain.EmpVO;
 import com.kosmo.ui.dbmanager.service.emp.EmpService;
 import com.kosmo.ui.dbmanager.service.emp.impl.EmpServiceImpl;
