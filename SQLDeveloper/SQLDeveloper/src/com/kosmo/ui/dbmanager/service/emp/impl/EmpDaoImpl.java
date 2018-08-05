@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kosmo.ui.dbmanager.DBManager;
+import com.kosmo.ui.dbmanager.service.common.DBManager;
 import com.kosmo.ui.dbmanager.service.domain.EmpVO;
 import com.kosmo.ui.dbmanager.service.emp.EmpDao;
 

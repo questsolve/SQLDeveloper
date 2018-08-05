@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.kosmo.ui.dbmanager.DBManager;
+import com.kosmo.ui.dbmanager.service.common.DBManager;
 import com.kosmo.ui.dbmanager.service.domain.EmpVO;
 import com.kosmo.ui.dbmanager.service.domain.SqlUsageVO;
 import com.kosmo.ui.dbmanager.service.sql.SqlUsageDao;

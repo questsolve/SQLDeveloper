@@ -23,7 +23,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultTreeSelectionModel;
 import javax.swing.tree.TreeSelectionModel;
 
-import com.kosmo.ui.dbmanager.DBManager;
+import com.kosmo.ui.dbmanager.service.common.DBManager;
 import com.kosmo.ui.dbmanager.service.domain.EmpVO;
 
 import javax.swing.JTree;

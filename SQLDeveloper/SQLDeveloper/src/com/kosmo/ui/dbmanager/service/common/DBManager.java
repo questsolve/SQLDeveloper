@@ -1,4 +1,4 @@
-package com.kosmo.ui.dbmanager;
+package com.kosmo.ui.dbmanager.service.common;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

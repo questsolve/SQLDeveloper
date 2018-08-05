@@ -19,7 +19,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import com.kosmo.ui.dbmanager.DBManager;
+import com.kosmo.ui.dbmanager.service.common.DBManager;
 import com.kosmo.ui.dbmanager.service.sql.SqlUsageService;
 import com.kosmo.ui.dbmanager.service.sql.impl.SqlUsageServiceImpl;
 

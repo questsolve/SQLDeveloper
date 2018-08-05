@@ -16,7 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import com.kosmo.ui.dbmanager.DBManager;
+import com.kosmo.ui.dbmanager.service.common.DBManager;
 import com.kosmo.ui.dbmanager.service.domain.EmpVO;
 import com.kosmo.ui.dbmanager.service.emp.EmpService;
 import com.kosmo.ui.dbmanager.service.emp.impl.EmpServiceImpl;
