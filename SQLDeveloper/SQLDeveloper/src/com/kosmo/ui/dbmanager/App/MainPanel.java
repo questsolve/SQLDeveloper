@@ -20,7 +20,7 @@ import javax.swing.JMenuBar;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 
-public class SamplePanel extends JFrame {
+public class MainPanel extends JFrame {
 
 	private JPanel contentPane;
 	JPanel centerPanel;
@@ -42,7 +42,7 @@ public class SamplePanel extends JFrame {
 					
 					vo = empServiceImpl.select(vo);
 					System.out.println(vo);
-					SamplePanel frame = new SamplePanel(vo);
+					MainPanel frame = new MainPanel(vo);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -54,7 +54,7 @@ public class SamplePanel extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SamplePanel(EmpVO vo) {
+	public MainPanel(EmpVO vo) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1200, 675);
 
